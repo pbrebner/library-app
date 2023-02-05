@@ -60,6 +60,10 @@ body {
     top: 50%;
 }
 
+.formContainer.show {
+    display: block;
+}
+
 .bookForm {
     padding-top: 10px;
     display: grid;

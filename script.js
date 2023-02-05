@@ -85,11 +85,13 @@ function displayLibrary(myLibrary) {
 }
 
 function openForm() {
-    document.querySelector(".formContainer").style.display = "block";
+    setTimeout(() => {
+        document.querySelector(".formContainer").classList.add("show");
+    }, 100);
 }
 
 function closeForm() {
-    document.querySelector(".formContainer").style.display = "none";
+    document.querySelector(".formContainer").classList.remove("show");
 }
 
 function processForm() {
@@ -134,4 +136,14 @@ bookForm.addEventListener("submit", (event) => {
 
 cancelBtn.addEventListener("click", () => {
     closeForm();
+});
+
+document.addEventListener("click", (event) => {
+    const isClosest = event.target.closest(".formContainer");
+    if (
+        !isClosest &&
+        document.querySelector(".formContainer").classList.contains("show")
+    ) {
+        closeForm();
+    }
 });
