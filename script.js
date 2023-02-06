@@ -41,45 +41,56 @@ function displayLibrary(myLibrary) {
         const bookContainer = document.createElement("div");
         bookContainer.classList.add("bookContainer");
 
+        const delContainer = document.createElement("div");
+        delContainer.classList.add("delContainer");
         const delBtn = document.createElement("button");
         delBtn.classList.add("delBtn");
-        delBtn.innerHTML = "Delete";
+        delBtn.innerHTML = "X";
 
         delBtn.addEventListener("click", () => {
             removeBookFromLibrary(bookInLibrary.title);
         });
 
-        bookContainer.appendChild(delBtn);
+        delContainer.appendChild(delBtn);
+        bookContainer.appendChild(delContainer);
 
-        const title = document.createElement("p");
+        const infoContainer = document.createElement("div");
+        infoContainer.classList.add("infoContainer");
+        const title = document.createElement("h3");
         const author = document.createElement("p");
         const numPages = document.createElement("p");
 
         title.innerHTML = bookInLibrary.title;
-        author.innerHTML = bookInLibrary.author;
-        numPages.innerHTML = bookInLibrary.numPages;
+        author.innerHTML = "By: " + bookInLibrary.author;
+        numPages.innerHTML = "Number of Pages: " + bookInLibrary.numPages;
 
-        bookContainer.appendChild(title);
-        bookContainer.appendChild(author);
-        bookContainer.appendChild(numPages);
+        infoContainer.appendChild(title);
+        infoContainer.appendChild(author);
+        infoContainer.appendChild(numPages);
 
         const read = document.createElement("button");
-        read.classList.add("read");
 
-        if (bookInLibrary.read === "true") {
+        if (bookInLibrary.read === true) {
             read.innerHTML = "Read";
+            read.classList.add("read");
         } else {
             read.innerHTML = "Not Read";
+            read.classList.remove("read");
         }
 
         read.addEventListener("click", () => {
-            read.innerHTML === "Read"
-                ? (read.innerHTML = "Not Read")
-                : (read.innerHTML = "Read");
+            if (read.innerHTML === "Read") {
+                read.innerHTML = "Not Read";
+                read.classList.remove("read");
+            } else {
+                read.innerHTML = "Read";
+                read.classList.add("read");
+            }
         });
 
-        bookContainer.appendChild(read);
+        infoContainer.appendChild(read);
 
+        bookContainer.appendChild(infoContainer);
         libraryContainer.appendChild(bookContainer);
     });
 }
@@ -87,11 +98,13 @@ function displayLibrary(myLibrary) {
 function openForm() {
     setTimeout(() => {
         document.querySelector(".formContainer").classList.add("show");
+        document.querySelector(".formBackdrop").classList.add("show");
     }, 100);
 }
 
 function closeForm() {
     document.querySelector(".formContainer").classList.remove("show");
+    document.querySelector(".formBackdrop").classList.remove("show");
 }
 
 function processForm() {

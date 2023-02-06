@@ -2,18 +2,22 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>My Library</title>
+        <title>Library</title>
         <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto"
+        />
         <script src="script.js" defer></script>
     </head>
     <body>
         <header class="header">
             <h1>My Library</h1>
-            <button class="addBookBtn">Add Book</button>
+            <button class="addBookBtn">+ Add Book</button>
         </header>
         <main class="main">
             <div class="libraryContainer"></div>
-
+            <div class="formBackdrop"></div>
             <div class="formContainer">
                 <p>Add a book to the library</p>
                 <form action="/books" method="post" class="bookForm">
@@ -44,6 +48,7 @@
                             id="numPages"
                             name="numPages"
                             class="numPages"
+                            required
                         />
                     </div>
                     <div class="formItem">
