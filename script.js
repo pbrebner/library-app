@@ -2,34 +2,40 @@
 
 let myLibrary = [];
 
-function Book(title, author, numPages, read) {
-    this.title = title;
-    this.author = author;
-    this.numPages = numPages;
-    this.read = read;
-}
-
-function addBookToLibrary(book) {
-    //Adds book to myLibrary
-    if (myLibrary.some((bookInLibrary) => bookInLibrary.title === book.title)) {
-        return;
-    } else {
-        myLibrary.push(book);
+class Book {
+    constructor(title, author, numPages, read) {
+        this.title = title;
+        this.author = author;
+        this.numPages = numPages;
+        this.read = read;
     }
 
-    displayLibrary(myLibrary);
-}
-
-function removeBookFromLibrary(book) {
-    //Removes book from myLibrary
-    myLibrary.forEach((bookInLibrary) => {
-        if (bookInLibrary.title === book) {
-            const index = myLibrary.indexOf(bookInLibrary);
-            myLibrary.splice(index, 1);
+    addBookToLibrary() {
+        //adds book to myLibrary
+        if (
+            myLibrary.some(
+                (bookInLibrary) => bookInLibrary.title === this.title
+            )
+        ) {
+            return;
+        } else {
+            myLibrary.push(this);
         }
-    });
 
-    displayLibrary(myLibrary);
+        displayLibrary(myLibrary);
+    }
+
+    removeBookFromLibrary() {
+        //Removes book from myLibrary
+        myLibrary.forEach((bookInLibrary) => {
+            if (bookInLibrary.title === this.title) {
+                const index = myLibrary.indexOf(bookInLibrary);
+                myLibrary.splice(index, 1);
+            }
+        });
+
+        displayLibrary(myLibrary);
+    }
 }
 
 function displayLibrary(myLibrary) {
@@ -48,7 +54,7 @@ function displayLibrary(myLibrary) {
         delBtn.innerHTML = "X";
 
         delBtn.addEventListener("click", () => {
-            removeBookFromLibrary(bookInLibrary.title);
+            bookInLibrary.removeBookFromLibrary();
         });
 
         delContainer.appendChild(delBtn);
@@ -142,7 +148,8 @@ bookForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const book = processForm();
-    addBookToLibrary(book);
+    book.addBookToLibrary();
+    //addBookToLibrary(book);
 
     closeForm();
 });
