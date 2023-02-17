@@ -135,6 +135,38 @@ function processForm() {
     return book;
 }
 
+function validateForm() {
+    const title = bookForm["title"];
+    const author = bookForm["author"];
+    const numPages = bookForm["numPages"];
+
+    title.addEventListener("input", () => {
+        if (title.validity.valueMissing) {
+            title.setCustomValidity("Need to include a book title");
+        } else if (title.validity.tooLong) {
+            title.setCustomValidity("Needs to be shorter than 100 characters");
+        } else {
+            title.setCustomValidity("");
+        }
+    });
+    author.addEventListener("input", () => {
+        if (author.validity.valueMissing) {
+            author.setCustomValidity("Need to include the books author");
+        } else if (author.validity.tooLong) {
+            author.setCustomValidity("Needs to be shorter than 50 characters");
+        } else {
+            author.setCustomValidity("");
+        }
+    });
+    numPages.addEventListener("input", () => {
+        if (numPages.validity.rangeOverflow) {
+            numPages.setCustomValidity("Must be less that 5000 pages");
+        } else {
+            numPages.setCustomValidity("");
+        }
+    });
+}
+
 const addBookBtn = document.querySelector(".addBookBtn");
 
 addBookBtn.addEventListener("click", () => {
@@ -144,12 +176,13 @@ addBookBtn.addEventListener("click", () => {
 const bookForm = document.querySelector(".bookForm");
 const cancelBtn = document.querySelector(".cancelBtn");
 
+validateForm();
+
 bookForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const book = processForm();
     book.addBookToLibrary();
-    //addBookToLibrary(book);
 
     closeForm();
 });
