@@ -4,7 +4,9 @@
 
 ## About
 
-A library app to add/remove your favorite books as part of The ODIN Project.
+A library app to add/remove your favourite books as part of The ODIN Project.
+
+[Try it out](https://pbrebner.github.io/library-app/)
 
 ## Topics Covered
 
